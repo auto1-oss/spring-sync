@@ -16,7 +16,7 @@
 package org.springframework.sync.diffsync.web;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Collections;
 
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
@@ -38,15 +38,20 @@ public class JsonPatchHttpMessageConverter extends AbstractHttpMessageConverter<
 
 	private static final MediaType JSON_PATCH = new MediaType("application", "json-patch+json");
 
-	private static final ObjectMapper MAPPER = new ObjectMapper();
+	private ObjectMapper objectMapper;
 
 	private JsonPatchPatchConverter jsonPatchMaker;
 
-	public JsonPatchHttpMessageConverter() {
-		setSupportedMediaTypes(Arrays.asList(JSON_PATCH));
-		this.jsonPatchMaker = new JsonPatchPatchConverter();
+	public JsonPatchHttpMessageConverter(ObjectMapper objectMapper) {
+		setSupportedMediaTypes(Collections.singletonList(JSON_PATCH));
+		this.jsonPatchMaker = new JsonPatchPatchConverter(objectMapper);
+		this.objectMapper = objectMapper;
 	}
-	
+
+	public JsonPatchHttpMessageConverter() {
+		this(new ObjectMapper());
+	}
+
 	@Override
 	protected boolean supports(Class<?> clazz) {
 		return Patch.class.isAssignableFrom(clazz);
@@ -54,13 +59,13 @@ public class JsonPatchHttpMessageConverter extends AbstractHttpMessageConverter<
 
 	@Override
 	protected Patch readInternal(Class<? extends Patch> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
-		return jsonPatchMaker.convert(MAPPER.readTree(inputMessage.getBody()));
+		return jsonPatchMaker.convert(objectMapper.readTree(inputMessage.getBody()));
 	}
 
 	@Override
 	protected void writeInternal(Patch patch, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
 		outputMessage.getHeaders().setContentType(JSON_PATCH);
-		MAPPER.writer().writeValue(outputMessage.getBody(), jsonPatchMaker.convert(patch));
+		objectMapper.writer().writeValue(outputMessage.getBody(), jsonPatchMaker.convert(patch));
 	}
 
 }

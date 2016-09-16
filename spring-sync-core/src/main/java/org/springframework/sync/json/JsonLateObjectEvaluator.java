@@ -26,18 +26,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 class JsonLateObjectEvaluator implements LateObjectEvaluator {
 
-	private static final ObjectMapper MAPPER = new ObjectMapper();
+	private ObjectMapper objectMapper;
 
 	private JsonNode valueNode;
 
-	public JsonLateObjectEvaluator(JsonNode valueNode) {
+	public JsonLateObjectEvaluator(JsonNode valueNode, ObjectMapper objectMapper) {
 		this.valueNode = valueNode;
+		this.objectMapper = objectMapper;
 	}
 	
 	@Override
 	public <T> Object evaluate(Class<T> type) {
 		try {
-			return MAPPER.readValue(valueNode.traverse(), type);
+			return objectMapper.readValue(valueNode.traverse(), type);
 		} catch (Exception e) {
 			return null;
 		}
