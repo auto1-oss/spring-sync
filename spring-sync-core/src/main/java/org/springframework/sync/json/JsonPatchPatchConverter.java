@@ -42,7 +42,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class JsonPatchPatchConverter implements PatchConverter<JsonNode> {
 
-	private static final ObjectMapper MAPPER = new ObjectMapper();
+	private ObjectMapper objectMapper;
+
+	public JsonPatchPatchConverter(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper;
+	}
+
+	public JsonPatchPatchConverter() {
+		this(new ObjectMapper());
+	}
 
 	/**
 	 * Constructs a {@link Patch} object given a JsonNode.
@@ -106,7 +114,7 @@ public class JsonPatchPatchConverter implements PatchConverter<JsonNode> {
 			}
 			Object value = operation.getValue();
 			if (value != null) {
-				opNode.set("value", MAPPER.valueToTree(value));
+				opNode.set("value", objectMapper.valueToTree(value));
 			}
 			patchNode.add(opNode);
 		}
@@ -128,7 +136,7 @@ public class JsonPatchPatchConverter implements PatchConverter<JsonNode> {
 		} else if (valueNode.isLong()) {
 			return valueNode.asLong();
 		} else if (valueNode.isObject()) {
-			return new JsonLateObjectEvaluator(valueNode);
+			return new JsonLateObjectEvaluator(valueNode, objectMapper);
 		} else if (valueNode.isArray()) {
 			// TODO: Convert valueNode to array
 		}
