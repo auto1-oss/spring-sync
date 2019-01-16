@@ -129,7 +129,7 @@ public class MoveOperationTest extends TestCase {
 		assertTrue(todos.get(2).isComplete());
 	}
 
-	public void testMoveListElementToBeginningOfList_usingTilde() throws Exception {
+	public void testMoveListElementToBeginningOfList_usingHyphen() throws Exception {
 		// initial Todo list
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.add(new Todo(1L, "A", true));
@@ -143,12 +143,12 @@ public class MoveOperationTest extends TestCase {
 		expected.add(new Todo(3L, "C", false));
 		expected.add(new Todo(4L, "E", false));
 
-		MoveOperation move = new MoveOperation("/1", "/~");
+		MoveOperation move = new MoveOperation("/1", "/-");
 		move.perform(todos, Todo.class);
 		assertEquals(expected, todos);
 	}
 
-	public void testMoveListElementToEndOfList_usingTilde() throws Exception {
+	public void testMoveListElementToEndOfList_usingHyphen() throws Exception {
 		// initial Todo list
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.add(new Todo(1L, "A", true));
@@ -162,7 +162,7 @@ public class MoveOperationTest extends TestCase {
 		expected.add(new Todo(4L, "E", false));
 		expected.add(new Todo(2L, "G", false));
 
-		MoveOperation move = new MoveOperation("/~", "/1");
+		MoveOperation move = new MoveOperation("/-", "/1");
 		move.perform(todos, Todo.class);
 		assertEquals(expected, todos);
 	}

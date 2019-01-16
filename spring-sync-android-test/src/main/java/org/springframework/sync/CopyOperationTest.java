@@ -118,14 +118,14 @@ public class CopyOperationTest extends TestCase {
 		assertTrue(todos.get(3).isComplete());
 	}
 
-	public void testCopyListElementToEndOfList_usingTilde() throws Exception {
+	public void testCopyListElementToEndOfList_usingHyphen() throws Exception {
 		// initial Todo list
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.add(new Todo(1L, "A", true));
 		todos.add(new Todo(2L, "B", false));
 		todos.add(new Todo(3L, "C", false));
 
-		CopyOperation copy = new CopyOperation("/~", "/0");
+		CopyOperation copy = new CopyOperation("/-", "/0");
 		copy.perform(todos, Todo.class);
 
 		assertEquals(4, todos.size());
@@ -136,14 +136,14 @@ public class CopyOperationTest extends TestCase {
 																// duplicate IDs
 	}
 
-	public void testCopyListElementFromEndOfList_usingTilde() throws Exception {
+	public void testCopyListElementFromEndOfList_usingHyphen() throws Exception {
 		// initial Todo list
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.add(new Todo(1L, "A", true));
 		todos.add(new Todo(2L, "B", false));
 		todos.add(new Todo(3L, "C", false));
 
-		CopyOperation copy = new CopyOperation("/0", "/~");
+		CopyOperation copy = new CopyOperation("/0", "/-");
 		copy.perform(todos, Todo.class);
 
 		assertEquals(4, todos.size());

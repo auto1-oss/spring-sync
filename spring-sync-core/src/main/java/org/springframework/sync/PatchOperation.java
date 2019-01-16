@@ -172,7 +172,7 @@ public abstract class PatchOperation {
 		
 		String lastNode = pathNodes[pathNodes.length - 1];
 		
-		if ("~".equals(lastNode)) {
+		if ("-".equals(lastNode)) {
 			return -1;
 		}
 		

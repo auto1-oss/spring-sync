@@ -73,7 +73,7 @@ public class PathToSpEL {
 				continue;
 			}
 			
-			if ("~".equals(pathNode)) {
+			if ("-".equals(pathNode)) {
 				spelBuilder.append("[size() - 1]");
 				continue;
 			}

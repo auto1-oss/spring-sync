@@ -33,8 +33,8 @@ public class PathToSpelTest extends TestCase {
 		assertEquals("B", (String) expr.getValue(todos));
 	}
 
-	public void testListTilde() {
-		Expression expr = PathToSpEL.pathToExpression("/~/description");
+	public void testListHyphen() {
+		Expression expr = PathToSpEL.pathToExpression("/-/description");
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.add(new Todo(1L, "A", false));
 		todos.add(new Todo(2L, "B", false));

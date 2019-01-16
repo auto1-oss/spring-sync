@@ -55,7 +55,7 @@ public class AddOperationTest {
 
 	
 	@Test
-	public void addItemToList() throws Exception {
+	public void insertItemIntoList() throws Exception {
 		// initial Todo list
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.add(new Todo(1L, "A", false));
@@ -75,5 +75,52 @@ public class AddOperationTest {
 		assertEquals("C", todos.get(3).getDescription());
 		assertFalse(todos.get(3).isComplete());
 	}
-	
+
+	@Test
+	public void addItemToList() throws Exception {
+		// initial Todo list
+		List<Todo> todos = new ArrayList<Todo>();
+		todos.add(new Todo(1L, "A", false));
+		todos.add(new Todo(2L, "B", false));
+		todos.add(new Todo(3L, "C", false));
+
+		AddOperation add = new AddOperation("/-", new Todo(null, "D", true));
+		add.perform(todos, Todo.class);
+
+		assertEquals(4, todos.size());
+		assertEquals("A", todos.get(0).getDescription());
+		assertFalse(todos.get(0).isComplete());
+		assertEquals("B", todos.get(1).getDescription());
+		assertFalse(todos.get(1).isComplete());
+		assertEquals("C", todos.get(2).getDescription());
+		assertFalse(todos.get(2).isComplete());
+		assertEquals("D", todos.get(3).getDescription());
+		assertTrue(todos.get(3).isComplete());
+	}
+
+	@Test
+	public void addItemToListProperty() throws Exception {
+		TodoList lst = new TodoList();
+		// initial Todo list
+		List<Todo> todos = new ArrayList<Todo>();
+		todos.add(new Todo(1L, "A", false));
+		todos.add(new Todo(2L, "B", false));
+		todos.add(new Todo(3L, "C", false));
+
+		lst.setTodos(todos);
+
+		AddOperation add = new AddOperation("/todos/-", new Todo(null, "D", true));
+		add.perform(lst, TodoList.class);
+
+		assertEquals(4, todos.size());
+		assertEquals("A", todos.get(0).getDescription());
+		assertFalse(todos.get(0).isComplete());
+		assertEquals("B", todos.get(1).getDescription());
+		assertFalse(todos.get(1).isComplete());
+		assertEquals("C", todos.get(2).getDescription());
+		assertFalse(todos.get(2).isComplete());
+		assertEquals("D", todos.get(3).getDescription());
+		assertTrue(todos.get(3).isComplete());
+	}
+
 }
