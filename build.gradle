@@ -19,14 +19,14 @@ ext.coreModuleProjects = javaProjects
 configure(allprojects) {
 	group = "org.springframework.sync"
 
-	ext.springVersion            = "4.0.7.RELEASE"
+	ext.springVersion            = "4.3.4.RELEASE"
 	ext.springReleaseVersion     = "latest.release"
 	ext.springSnapshotVersion    = "latest.integration"
 	ext.springAndroidVersion     = "2.0.0.BUILD-SNAPSHOT"
 	ext.commonsLangVersion       = "2.6"
 	ext.diffUtilsVersion         = "1.2.1"
 	ext.slf4jVersion             = "1.7.6"
-	ext.jacksonVersion           = "2.4.3"
+	ext.jacksonVersion           = "2.6.6"
 	ext.springDataRedisVersion   = "1.4.0.RELEASE"
 	ext.springDataGemfireVersion = "1.5.0.RELEASE"
 	ext.springDataCommonsVersion = "1.9.0.RELEASE"
@@ -355,9 +355,5 @@ artifacts {
 	archives dist
 	archives project(':docs').docsZip
 }
-
-	task wrapper(type: Wrapper) {
-		gradleVersion = "1.12"
-	}
 
 }

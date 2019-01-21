@@ -503,7 +503,7 @@ public class DiffSyncTest {
 		// Initially, the server shadow's server and client versions are both 0,
 		// matching the incoming patch's versions, so the patch is applied normally.
 		List<PatchOperation> ops1 = new ArrayList<PatchOperation>();
-		ops1.add(new AddOperation("/~", new Todo(100L, "NEW ITEM 100", false)));
+		ops1.add(new AddOperation("/-", new Todo(100L, "NEW ITEM 100", false)));
 		VersionedPatch versionedPatch = new VersionedPatch(ops1, 0, 0);
 		
 		// At this point, the client sends the patch to the server, the client puts the patch in an outbound stack, 
@@ -534,7 +534,7 @@ public class DiffSyncTest {
 		// So it produces a new patch against its shadow (whose server version is still at 0 and client version is 1).
 		// It then sends both patches to the server and the server attempts to apply them both.
 		List<PatchOperation> ops2 = new ArrayList<PatchOperation>();
-		ops2.add(new AddOperation("/~", new Todo(200L, "NEW ITEM 200", false)));
+		ops2.add(new AddOperation("/-", new Todo(200L, "NEW ITEM 200", false)));
 		VersionedPatch versionedPatch2 = new VersionedPatch(ops2, 0, 1);
 		patched = sync.apply(patched, versionedPatch, versionedPatch2);
 

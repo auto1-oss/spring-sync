@@ -58,4 +58,4 @@ dependencies {
 	testCompile("org.springframework.data:spring-data-commons:1.8.2.RELEASE")
 }
 
-task wrapper(type: Wrapper) { gradleVersion = "2.0" }
+task wrapper(type: Wrapper) { gradleVersion = "5.1.1" }

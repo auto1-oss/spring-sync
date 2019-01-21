@@ -36,8 +36,8 @@ public class PathToSpelTest {
 	}
 	
 	@Test
-	public void listTilde() {
-		Expression expr = PathToSpEL.pathToExpression("/~/description");
+	public void listHyphen() {
+		Expression expr = PathToSpEL.pathToExpression("/-/description");
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.add(new Todo(1L, "A", false));
 		todos.add(new Todo(2L, "B", false));

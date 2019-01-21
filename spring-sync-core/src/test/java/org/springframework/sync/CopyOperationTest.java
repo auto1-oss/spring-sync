@@ -118,14 +118,14 @@ public class CopyOperationTest {
 	}
 	
 	@Test
-	public void copyListElementToEndOfList_usingTilde() throws Exception {
+	public void copyListElementToEndOfList_usingHyphen() throws Exception {
 		// initial Todo list
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.add(new Todo(1L, "A", true));
 		todos.add(new Todo(2L, "B", false));
 		todos.add(new Todo(3L, "C", false));
 		
-		CopyOperation copy = new CopyOperation("/~", "/0");
+		CopyOperation copy = new CopyOperation("/-", "/0");
 		copy.perform(todos, Todo.class);
 		
 		assertEquals(4, todos.size());
@@ -133,14 +133,14 @@ public class CopyOperationTest {
 	}
 
 	@Test
-	public void copyListElementFromEndOfList_usingTilde() throws Exception {
+	public void copyListElementFromEndOfList_usingHyphen() throws Exception {
 		// initial Todo list
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.add(new Todo(1L, "A", true));
 		todos.add(new Todo(2L, "B", false));
 		todos.add(new Todo(3L, "C", false));
 		
-		CopyOperation copy = new CopyOperation("/0", "/~");
+		CopyOperation copy = new CopyOperation("/0", "/-");
 		copy.perform(todos, Todo.class);
 		
 		assertEquals(4, todos.size());
